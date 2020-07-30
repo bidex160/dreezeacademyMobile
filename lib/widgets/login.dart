@@ -1,13 +1,13 @@
+import 'package:country_pickers/country.dart';
 import 'package:dreezeacademy/Size_Config/Config.dart';
-import 'package:dreezeacademy/provider/classProvider.dart';
-import 'package:dreezeacademy/screen/Tabscreen.dart';
+import 'package:dreezeacademy/provider/signupprovider.dart';
+import 'package:connectivity_wrapper/connectivity_wrapper.dart';
 import 'package:dreezeacademy/screen/WelcomeScreen.dart';
-import 'package:dreezeacademy/screen/mathematicsScreen.dart';
 import 'package:dreezeacademy/screen/signup_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
-import 'package:provider/provider.dart';
 import '../apptheme/app_theme.dart';
+import 'dart:async';
 
 class LoginWidget extends StatefulWidget {
   @override
@@ -15,168 +15,198 @@ class LoginWidget extends StatefulWidget {
 }
 
 class _LoginWidgetState extends State<LoginWidget> {
-
-  AnimationController _controller;
-  final _myDuration = Duration(seconds: 5);
-  // starting
-  var _myValue = 0.0;
-
-  var _isInit=true;
-
+ var _hide = true;
   @override
   void initState() {
 
     super.initState();
   }
 
-  @override
-  void didChangeDependencies() {
-    if(_isInit){
-      final classprovider = Provider.of<ClassProvider>(context).testurl();
-
-    }
-    _isInit = false;
-    super.didChangeDependencies();
-  }
-  final _myNewValue = 100.0;
-
   Future<void> validateDetails() async{
     if(_key.currentState.validate()){
-     Navigator.of(context).pushReplacementNamed(WelcomeScreen.routeName);
+      print("....................here.....................");
+
+//      SignUpProvider.Login(_username.value.text, _password.value.text).then((value) {
+//        print("....................here.....................");
+//        print(value);
+//        print("....................here.....................");
+//      });
+    Navigator.of(context).pushReplacement(MaterialPageRoute(
+      builder: (_) {
+        return WelcomeScreen();
+      }
+    ));
 
     }
   }
   final _key = GlobalKey<FormState>();
+
+  TextEditingController _username = TextEditingController();
+  TextEditingController _password = TextEditingController();
   @override
   Widget build(BuildContext context) {
 
-    return Container(
+    return ConnectivityWidgetWrapper(
+      decoration: BoxDecoration(
+        color: appThemeLight.primaryColor,
+      ),
+      child: Container(
 
-      child: CustomPaint(
-        painter: Draw(),
+        child: CustomPaint(
+          painter: Draw(),
 
 
-            child: Container(
-              padding: EdgeInsets.only(left: 15, right: 15),
-             // elevation: 5,
+              child: Container(
+                padding: EdgeInsets.only(left: 15, right: 15),
+               // elevation: 5,
 
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: <Widget>[
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: <Widget>[
 
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text("Hello,", style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: Config.yMargin(context, 5)
-                            ),),
-                            Text("Welcome", style: TextStyle(
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text("Hello,", style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: Config.yMargin(context, 5)
-                            ),),
+                              ),),
+                              Text("Welcome", style: TextStyle(
 
-                          ],
-                        ),
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: Config.yMargin(context, 5)
+                              ),),
 
-                Padding(
-                  padding: const EdgeInsets.only(top: 10),
-                  child: Card(
-
-                    elevation: 1,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Form(
-                        key: _key,
-
-                           child:Column(
-                             children: <Widget>[
-
-                          TextFormField(
-                            decoration: InputDecoration(
-                             labelText: "Username/email"
-                            ),
-                            validator: (value){
-                              if(value.isEmpty){
-                                return 'Please enter username';
-                              }
-                              return null;
-                            },
+                            ],
                           ),
-                          TextFormField(
 
-                            decoration: InputDecoration(
-                              labelText: "password",
+                  Padding(
+                    padding: const EdgeInsets.only(top: 10),
+                    child: Card(
 
+                      elevation: 1,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Form(
+                          key: _key,
+
+                             child:Column(
+                               children: <Widget>[
+
+                            TextFormField(
+                              autofocus: true,
+                              style: appThemeLight.textTheme.display2,
+                              decoration: InputDecoration(
+                               labelText: "Username/email",
+                                labelStyle: appThemeLight.textTheme.display1,
+
+
+
+                              ),
+                              validator: (value){
+                                if(value.isEmpty){
+                                  return 'Please enter username';
+                                }
+                                return null;
+                              },
                             ),
-                            validator: (value){
-                              if(value.isEmpty){
-                                return 'Please enter password';
-                              }
-                              return null;
-                            },
-                          ),
-                               Padding(
-                                 padding: const EdgeInsets.only(top: 25),
-                                 child: Container(
-                                   width: Config.xMargin(context, 60),
-                                   child: FlatButton(
-                                     shape: RoundedRectangleBorder(
-                                       borderRadius: BorderRadius.circular(10),
-                                     ),
+                            TextFormField(
 
-                                     color: appThemeLight.primaryColor,
-                                     child: Text(
-                                         "Signin"
+                              obscureText: _hide,
+                              style: appThemeLight.textTheme.display2,
+                              decoration: InputDecoration(
+
+                                labelText: "password",
+                                labelStyle: appThemeLight.textTheme.display1,
+                               suffixIcon: IconButton(
+                                 icon: Icon(
+                                   Icons.remove_red_eye
+                                 ),
+                                 onPressed: (){
+                                   setState(() {
+                                     _hide = !_hide;
+                                   });
+                                 },
+                               )
+
+                              ),
+                              validator: (value){
+                                if(value.isEmpty){
+                                  return 'Please enter password';
+                                }
+                                return null;
+                              },
+                            ),
+                                 Padding(
+                                   padding: const EdgeInsets.only(top: 25),
+                                   child: Container(
+                                     width: Config.xMargin(context, 35),
+                                     child: FlatButton(
+                                       shape: RoundedRectangleBorder(
+                                         borderRadius: BorderRadius.circular(10),
+                                       ),
+
+                                       color: appThemeLight.primaryColor,
+                                       child: Text(
+                                           "Signin", style: TextStyle(
+                                         color: Colors.white
+                                       ),
+                                       ),
+                                       onPressed: (){
+                                       validateDetails();
+                                       },
                                      ),
-                                     onPressed: (){
-                                     validateDetails();
-                                     },
                                    ),
                                  ),
-                               ),
-                             ]
-                           ),
-                      ),
-                    ),
-
-                  ),
-                ),
-
-
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Text("Don't have an Account?"),
-
-                        InkWell(
-                          child: Text(" SignUp", style: TextStyle(
-                            color: appThemeLight.primaryColor,
-                          ),),
-                          onTap: (){
-                           Navigator.of(context).pushReplacementNamed(SignUpScreen.routeName);
-                          },
+                               ]
+                             ),
                         ),
-
-
-
-                      ],
+                      ),
 
                     ),
-                    
-
-                  ],
-                ),
-
-            ),
+                  ),
 
 
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Text("Don't have an Account?"),
+
+                          InkWell(
+                            child: Text(" SignUp", style: TextStyle(
+                              color: appThemeLight.primaryColor,
+                            ),),
+                            onTap: (){
+                             Navigator.of(context).push(MaterialPageRoute(
+                               builder: (_){
+                                 return SignUpScreen();
+                               }
+                             ));
+                            },
+                          ),
 
 
+
+                        ],
+
+                      ),
+
+
+                      
+
+                    ],
+                  ),
+
+              ),
+
+
+
+
+        ),
       ),
     );
   }

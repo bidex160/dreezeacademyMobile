@@ -1,8 +1,9 @@
 import 'package:dreezeacademy/provider/classProvider.dart';
 
 import 'package:dreezeacademy/apptheme/app_theme.dart';
-import 'package:dreezeacademy/provider/q&aprovider.dart';
+import 'package:dreezeacademy/provider/testprovider.dart';
 import 'package:dreezeacademy/screen/WelcomeScreen.dart';
+import 'package:dreezeacademy/screen/highlightscreen.dart';
 import './screen/ClassRoom.dart';
 import './screen/biologyscreen.dart';
 import 'package:dreezeacademy/screen/login_screen.dart';
@@ -15,6 +16,7 @@ import 'package:provider/provider.dart';
 
 
 void main() {
+
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(statusBarColor: appThemeLight.primaryColor));
   runApp(MyApp());
 }
@@ -29,18 +31,15 @@ class MyApp extends StatelessWidget {
             create: (ctx) => ClassProvider(),
         ),
         ChangeNotifierProvider(
-          create: (ctx) => QAProvider(),
+          create: (ctx) => TestProvider(),
         )
 
       ],
 
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
           title: 'DreezeAcademy',
-          theme: ThemeData(
-
-            primarySwatch: Colors.blue,
-            visualDensity: VisualDensity.adaptivePlatformDensity,
-          ),
+          theme: appThemeLight,
 //      home: MyHomePage(),
         initialRoute: '/',
         routes:{
@@ -51,6 +50,8 @@ class MyApp extends StatelessWidget {
              WelcomeScreen.routeName:(ctx) => WelcomeScreen(),
              MathsScreen.routeName:(ctx) => MathsScreen(),
              BiologyScreen.routeName:(ctx) => BiologyScreen(),
+
+
 
 //           SubscriptionScreen.routeName:(ctx) => SubscriptionScreen(),
 //           PracticeScreeen.routeName:(ctx) => PracticeScreeen(),

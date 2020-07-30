@@ -1,5 +1,6 @@
 
 import 'package:dreezeacademy/Size_Config/Config.dart';
+import 'package:dreezeacademy/screen/ClassRoom.dart';
 import 'package:dreezeacademy/screen/WelcomeScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -57,16 +58,25 @@ class _mathsscreenState extends State<mathsscreen> {
               child: ListView(
                 scrollDirection: Axis.horizontal,
                 children: <Widget>[
-                  Container(
-                    margin: EdgeInsets.all(Config.xMargin(context, 4)),
-                   height: Config.yMargin(context, 20),
-                    width: Config.xMargin(context, 35),
-                    child: Card(
-                      elevation: 5,
+                  InkWell(
+                    child: Container(
+                      margin: EdgeInsets.all(Config.xMargin(context, 4)),
+                     height: Config.yMargin(context, 20),
+                      width: Config.xMargin(context, 35),
+                      child: Card(
+                        elevation: 5,
 
+                      ),
+
+                      color: Colors.amber,
                     ),
-
-                    color: Colors.amber,
+                    onTap: (){
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (_){
+                          return ClassRoom();
+                        }
+                      ));
+                    },
                   ),
                   Container(
                     margin: EdgeInsets.all(Config.xMargin(context, 4)),

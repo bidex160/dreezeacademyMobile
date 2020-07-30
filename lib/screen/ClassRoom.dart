@@ -1,6 +1,6 @@
 import 'package:dreezeacademy/Size_Config/Config.dart';
 import 'package:dreezeacademy/provider/classProvider.dart';
-import 'package:dreezeacademy/provider/classquestion.dart';
+import 'package:dreezeacademy/model/classquestionmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:chewie/chewie.dart';
@@ -36,7 +36,7 @@ class classroom extends StatefulWidget {
 }
 
 class _classroomState extends State<classroom> {
-  ClassQuestion _currentquestion;
+  ClassQuestionModel _currentquestion;
   String _currentUrl ="https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4";
  VideoPlayerController _videoPlayerController;
   var _disposed = false;
@@ -50,7 +50,7 @@ setState(() {
   }
 
 
-  void currentQuestion(ClassQuestion classQuestion){
+  void currentQuestion(ClassQuestionModel classQuestion){
     setState(() {
      // _videoPlayerController.
 

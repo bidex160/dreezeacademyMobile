@@ -1,8 +1,4 @@
 
-import 'package:custom_dropdown/custom_dropdown.dart';
-import 'package:dreezeacademy/Size_Config/Config.dart';
-import 'package:dreezeacademy/apptheme/app_theme.dart';
-import 'package:dreezeacademy/screen/WelcomeScreen.dart';
 import 'package:dreezeacademy/screen/login_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +14,6 @@ class SplashScreenMain extends StatefulWidget {
 }
 
 class _SplashScreenMainState extends State<SplashScreenMain> {
-  final List<String> entries = <String>['A', 'B', 'C'];
 
   final List<int> colorCodes = <int>[600, 500, 100];
 

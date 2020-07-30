@@ -1,5 +1,5 @@
 import 'package:dreezeacademy/screen/ClassRoom.dart';
-import 'package:dreezeacademy/screen/practicequestionscreen.dart';
+import 'package:dreezeacademy/screen/testquestionscreen.dart';
 import 'package:dreezeacademy/screen/subscriptionscreen.dart';
 import 'package:flutter/material.dart';
 
@@ -42,7 +42,7 @@ class DrawerScreen extends StatelessWidget {
 
           }),
           buildListTile( Icons.question_answer, "Practice Questions", (){
-            navigationMethod(context, PracticeScreeen.routeName);
+            navigationMethod(context, TestScreeen.routeName);
 
           }),
           buildListTile( Icons.share, "ShareApp", (){

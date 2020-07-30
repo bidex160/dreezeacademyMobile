@@ -67,8 +67,7 @@ class _ChewiePlayerState extends State<ChewiePlayer> {
 
   @override
   Widget build(BuildContext context) {
-   //print("neeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeww");
-     //print(widget.videoPlayerController.position.then((value) => value));
+
 
     return Chewie(
       controller: chewieController,

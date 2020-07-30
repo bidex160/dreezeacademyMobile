@@ -1,6 +1,8 @@
 import 'package:dreezeacademy/widgets/Drawer.dart';
 import 'package:flutter/material.dart';
 import '../widgets/welcome.dart';
+import 'package:dreezeacademy/apptheme/app_theme.dart';
+import 'package:dreezeacademy/Size_Config/Config.dart';
 class WelcomeScreen extends StatelessWidget  {
   static const routeName = '/WelcomeScreen';
   @override
@@ -12,7 +14,7 @@ class WelcomeScreen extends StatelessWidget  {
         leading: Icon(
           Icons.school
         ),
-        title: Text("DreezeAcademy"),
+        title: Center(child: Text("DreezeAcademy", style: appThemeLight.appBarTheme.textTheme.title)),
 
       ),
       //resizeToAvoidBottomInset: false,

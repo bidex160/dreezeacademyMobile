@@ -1,6 +1,9 @@
 import 'package:custom_dropdown/custom_dropdown.dart';
-import 'package:dreezeacademy/screen/practicemain.dart';
-import 'package:dreezeacademy/screen/practicequestionscreen.dart';
+import 'package:dreezeacademy/screen/mathematicsScreen.dart';
+import 'package:dreezeacademy/screen/testanswer.dart';
+import 'package:dreezeacademy/screen/testsubject.dart';
+import 'package:dreezeacademy/screen/questionsubjectscreen.dart';
+import 'package:dreezeacademy/screen/testquestionscreen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -75,12 +78,6 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
       VideoPlayerController.network("https://github.com/GeekyAnts/flick-video-player-demo-videos/blob/master/example/rio_from_above_compressed.mp4?raw=true"),
     );
   }
-//  void _selectnumber(int index){
-//    setState(() {
-//      _selectedPage = index;
-//    });
-//  }
-
   @override
   void dispose() {
 
@@ -140,11 +137,125 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
 
                       ),
                       onTap: (){
-                        Navigator.of(context).push(MaterialPageRoute(
-                          builder: (_){
-                            return PracticeScreeen();
-                          }
-                        ));
+
+                        showDialog(context: context, builder: (context){
+                          return Dialog(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: Container(
+                              height: 200,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                children: <Widget>[
+
+                                  CircleAvatar(
+                                    backgroundColor: Colors.transparent,
+                                    backgroundImage: AssetImage('images/test.gif'),
+                                    child: Image.asset('images/test.gif'),
+                                  ),
+
+
+                                  Container(
+
+                                    width: Config.xMargin(context, 70),
+                                    height: Config.yMargin(context, 5),
+
+                                    decoration: BoxDecoration(
+                                        shape: BoxShape.rectangle,
+                                        borderRadius: BorderRadius.circular(5),
+                                        color: Colors.blue
+                                    ),
+
+                                    child: FlatButton (
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(5)
+                                      ),
+
+                                      child: Text("Question & Answer (WASSCE)", style: TextStyle(
+                                          color: Colors.white
+                                      ),),
+                                      onPressed: (){
+                                        Navigator.of(context).pushReplacement(MaterialPageRoute(
+                                          builder: (_){
+                                            return QuestionSubjectScreen("WASSCE");
+                                          }
+                                        ));
+
+                                      },
+                                    ),
+
+                                  ),
+                                  Container(
+
+                                    width: Config.xMargin(context, 70),
+                                    height: Config.yMargin(context, 5),
+
+                                    decoration: BoxDecoration(
+                                        shape: BoxShape.rectangle,
+                                        borderRadius: BorderRadius.circular(5),
+                                        color: Colors.blue
+                                    ),
+
+                                    child: FlatButton (
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(5)
+                                      ),
+
+                                      child: Text("Question & Answer (JAMB)", style: TextStyle(
+                                          color: Colors.white
+                                      ),),
+                                      onPressed: (){
+                                        Navigator.of(context).pushReplacement(MaterialPageRoute(
+                                            builder: (_){
+                                              return QuestionSubjectScreen("JAMB");
+                                            }
+                                        ));
+
+                                      },
+                                    ),
+
+                                  ),
+                                  Container(
+
+                                    width: Config.xMargin(context, 70),
+                                    height: Config.yMargin(context, 5),
+
+                                    decoration: BoxDecoration(
+                                        shape: BoxShape.rectangle,
+                                        borderRadius: BorderRadius.circular(5),
+                                        color: Colors.blue
+                                    ),
+
+                                    child: FlatButton (
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(5)
+                                      ),
+
+                                      child: Text("Take a Test", style: TextStyle(
+                                          color: Colors.white
+                                      ),),
+                                      onPressed: (){
+                                        Navigator.of(context).pushReplacement(MaterialPageRoute(
+                                          builder: (_){
+                                            return TestSubject();
+                                          }
+                                        ));
+
+                                      },
+                                    ),
+
+                                  ),
+
+
+
+
+                                ],
+                              ),
+                            ),
+                          );
+                        });
+
                       },
                     ),
                   ),
@@ -190,18 +301,27 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                       border: Border.all(color: appThemeLight.primaryColor),
 
                     ),
-                    child: Card(
+                    child: InkWell(
+                      child: Card(
 
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Icon(
-                              Icons.games
-                          ),
-                          Text("Game")
-                        ],
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Icon(
+                                Icons.games
+                            ),
+                            Text("Game")
+                          ],
+                        ),
+
                       ),
-
+                      onTap: (){
+                        Navigator.of(context).push(MaterialPageRoute(
+                          builder: (_){
+                            return AnswersScreen();
+                          }
+                        ));
+                      },
                     ),
                   ),
                 ],
@@ -291,7 +411,11 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                                   height: Config.yMargin(context, 10),
                                     child: Image.asset('images/geometry.png', height: 40,)),
                               onTap: (){
-                                  print("Image");
+                                Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (_){
+                                    return MathsScreen();
+                                  }
+                                ));
                               },
                             ),
 
